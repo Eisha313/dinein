@@ -6,16 +6,19 @@ import { useTheme } from '@react-navigation/native';
 export default function LoginHome({navigation}) {
     const { colors } = useTheme();
     return (
-        <View style={[customerStyles.bodyContainer, {backgroundColor: colors.background}]}>
+        <View style={[customerStyles.bodyContainer, ]}>
             <View style={customerStyles.bodyInner}>
                 <View style={customerStyles.container}>
-                    <Text><Text style={[customerStyles.bodyHeadingMain, {color: colors.primary}]}>WELCOME TO </Text>
-                    <Text style={[customerStyles.bodyHeadingMain, {color: colors.secondaryBackground}]}>DINE IN </Text></Text>
+                    
+                    <Text style={customerStyles.bodyHeadingMain}>
+                        <Text style={ {color: colors.secondary}}>Food </Text>
+
+                    <Text style={ {color: colors.secondaryBackground,marginLeft:20}}>HUB </Text></Text>
                 </View>
-                <View style={customerStyles.container}>
+                {/* <View style={customerStyles.container}>
                     <Image style={{width: 100, height: 100}} 
                         source={require('../resources/images/logo.png')} />
-                </View>
+                </View> */}
                 <View style={{width: '90%'}}>
                     <Button onPress={() => {
                         navigation.navigate('Customer Login')
@@ -34,7 +37,9 @@ const customerStyles = StyleSheet.create({
     bodyContainer: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor:"#1f3c2e"
+        
     },
     bodyInner: {
         width: '90%',
@@ -43,11 +48,21 @@ const customerStyles = StyleSheet.create({
         alignItems: 'center'
     },
     bodyHeadingMain: {
-        fontSize: 30,
-        fontWeight: 'bold'
+        fontSize: 35,
+        fontWeight: 'bold',
+        justifyContent:'center',
+        alignItems:'center'
     },
     container: {
-        marginBottom: 48
+        marginBottom: 48,
+        backgroundColor:"black",
+        height: 140,
+        width:110,
+        mariginTo:40,
+        justifyContent:'center',
+        alignItems:'center'
+        
+       
     },
     primaryButton: {
         borderRadius: 50,

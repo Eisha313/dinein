@@ -52,7 +52,7 @@ export default function CustomerLogin({navigation}) {
         <View style={customerStyles.bodyContainer}>
             <View style={customerStyles.bodyInner}>
                 <View style={{width: '100%', marginBottom: 16}}>
-                    <Text style={[customerStyles.bodyHeadingMain, {color: colors.primary}]}>LOGIN AS CUSTOMER</Text>
+                    <Text style={[customerStyles.bodyHeadingMain, {color: colors.primary}]}>LOGIN </Text>
                 </View>
                 <View style={{width: '100%', marginBottom: 8}}>
                     <TextInput style={[customerStyles.styledInput]} theme={{ roundness: 10 }} 
@@ -87,13 +87,13 @@ export default function CustomerLogin({navigation}) {
                         <Text style={{color: colors.primaryBackground}}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={{
+                {/* <TouchableOpacity style={{
                                 flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
                                 marginBottom: 16, 
                             }}>
                     <Image source={require('../resources/images/googleLogo.png')} style={{marginRight: 8}} ></Image>
                     <Text style={{color: colors.primary}}>SIGN IN</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
         </View>
     )

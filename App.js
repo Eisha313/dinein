@@ -44,11 +44,11 @@ const appTheme = {
     background: '#ffffff',
     card: '#D1141B',
     text: '#ffffff',
-    border: '#BABABA',
+    border: '##38644c',
     notfication: 'white',
-    primaryBackground: '#D1141B',
+    primaryBackground: '#38644c',
     primaryText: '#ffffff',
-    secondaryBackground: '#41179F',
+    secondaryBackground: '#38644c',
     secondaryText: '#ffffff'
   }
 }
@@ -223,43 +223,55 @@ function SettingsScreen({navigation}){
   )
 }
 const Drawer = createDrawerNavigator();
-function ManagerDrawer({navigation}) {
-  return (
-    <Drawer.Navigator useLegacyImplementation initialRouteName="Manage Hotels" screenOptions={{
-      headerStyle: { backgroundColor: appTheme.colors.secondaryBackground },
-      headerRight: () => (
-        <HeaderRightComponent />
-      ),
-      drawerLabelStyle: {marginLeft: -25, fontSize: 16},
-      drawerActiveTintColor: appTheme.colors.background,
-      drawerActiveBackgroundColor: appTheme.colors.secondaryBackground,
-      drawerInactiveTintColor: appTheme.colors.primary,
-      drawerInactiveBackgroundColor: appTheme.colors.background,
-      headerTintColor: '#ffff',
 
-    }} drawerContent={(props) => <CustomDrawer navigation={navigation} {...props} />}>
-      <Drawer.Screen name = "Home" component={HomeScreen} options = {{
-        drawerIcon: ({color}) => (
-          <Ionicon name="home-outline" size={22} color={color}/>
-        )
-      }}/>
-      <Drawer.Screen name = "Messages" component={MessageScreen} options = {{
-        drawerIcon: ({color}) => (
-          <Ionicon name="chatbox-ellipses-outline" size={22} color={color}/>
-        )
-      }}/>
-      <Drawer.Screen name="Manage Hotels" component={ManageHotels} options = {{
-        drawerIcon: ({color}) => (
-          <Ionicon name="business-outline" size={22} color={color}/>
-        )
-      }}/>
-      <Drawer.Screen name = "Settings" component={SettingsScreen} options = {{
-        drawerIcon: ({color}) => (
-          <Ionicon name="settings-outline" size={22} color={color}/>
-        )
-      }}/>
+function ManagerDrawer({ navigation }) {
+  return (
+    <Drawer.Navigator
+      initialRouteName="Manage Hotels"
+      screenOptions={{
+        headerStyle: { backgroundColor: appTheme.colors.secondaryBackground },
+        headerRight: () => <HeaderRightComponent />,
+        drawerLabelStyle: { marginLeft: -25, fontSize: 16 },
+        drawerActiveTintColor: appTheme.colors.background,
+        drawerActiveBackgroundColor: appTheme.colors.secondaryBackground,
+        drawerInactiveTintColor: appTheme.colors.primary,
+        drawerInactiveBackgroundColor: appTheme.colors.background,
+        headerTintColor: '#ffff',
+      }}
+      drawerContent={(props) => <CustomDrawer navigation={navigation} {...props} />}
+    >
+      <Drawer.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          drawerIcon: ({ color }) => <Ionicon name="home-outline" size={22} color={color} />,
+        }}
+      />
+      <Drawer.Screen
+        name="Messages"
+        component={MessageScreen}
+        options={{
+          drawerIcon: ({ color }) => (
+            <Ionicon name="chatbox-ellipses-outline" size={22} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Manage Hotels"
+        component={ManageHotels}
+        options={{
+          drawerIcon: ({ color }) => <Ionicon name="business-outline" size={22} color={color} />,
+        }}
+      />
+      <Drawer.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          drawerIcon: ({ color }) => <Ionicon name="settings-outline" size={22} color={color} />,
+        }}
+      />
     </Drawer.Navigator>
-  )
+  );
 }
 export default function App() {
   return (
