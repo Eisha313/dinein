@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "288669340848",
+    "project_id": "labproject-bb390",
+    "storage_bucket": "labproject-bb390.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288669340848:android:01833973d188745ec9d775",
+        "android_client_info": {
+          "package_name": "com.dinein"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbH8nfDIeQfALwddOpI3EYMo8CzrV3sBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

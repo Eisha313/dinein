@@ -52,7 +52,7 @@ export default function CustomerRegistration({navigation}) {
       };
       const uploadImage = async (fileSource) => {
         const filename = fileSource.substring(fileSource.lastIndexOf('/') + 1);
-        const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : fileSource;
+        const uploadUri = Platform.OS === 'ios' ? fileSource.replace('file://', '') : fileSource;
         const task = storage()
           .ref(filename)
           .putFile(uploadUri);
