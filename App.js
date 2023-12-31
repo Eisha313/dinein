@@ -265,6 +265,7 @@ export default function App() {
   return (
     <NavigationContainer theme={appTheme}>{
       <Stack.Navigator screenOptions={styledHeader} initialRouteName='Splash Screen'>
+      {/* <Stack.Screen options={disableHeaderOption} name="Home" component={CustomerHomeStack} /> */}
         <Stack.Screen options={disableHeaderOption} name="Splash Screen" component={SplashScreen} />
         <Stack.Screen options={disableHeaderOption} name="Login Home" component={LoginHome} />
         <Stack.Screen options={disableHeaderOption} name="Customer Login" component={CustomerLogin} />
