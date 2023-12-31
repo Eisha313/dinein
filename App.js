@@ -44,11 +44,11 @@ const appTheme = {
     background: '#ffffff',
     card: '#D1141B',
     text: '#ffffff',
-    border: '#BABABA',
+    border: '##38644c',
     notfication: 'white',
-    primaryBackground: '#D1141B',
+    primaryBackground: '#38644c',
     primaryText: '#ffffff',
-    secondaryBackground: '#41179F',
+    secondaryBackground: '#38644c',
     secondaryText: '#ffffff'
   }
 }
