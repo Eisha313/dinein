@@ -69,25 +69,33 @@ export default function CustomerHome({navigation}) {
                     setMaxPrice={setMaxPrice} minPrice={minPrice} maxPrice={maxPrice} modalShown={modalShown} setModalShown={setModalShown} />
                 </Modal>
                 <View style={{width: '100%'}}>
+                    <Text style={[{color: colors.primary, fontWeight: 'bold', fontSize: 30, width: '90%', fontFamily: "Poppins Black"}]}>What would you like to order</Text>
                     <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                         <View style={{width: '80%'}}>
                             <TextInput style={[customerStyles.styledInput]} theme={{ roundness: 10 }} 
-                                mode='outlined' label='Search'
-                                outlineColor={colors.border} activeOutlineColor={colors.secondaryBackground}
+                                mode='outlined' label='Find for food or restaurant...'
+                                outlineColor={'#808080'} 
+                                activeOutlineColor={"#5a5a5a"}
                                 value={searchInput} onChangeText={setSearchInput}
                             />
                         </View>
                         <View style={{marginLeft: 8}}>
-                            <TouchableOpacity style={{backgroundColor: colors.primaryBackground, borderRadius: 20, 
-                                flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding: 16}} onPress={() => {setModalShown(true)}}>
-                                <Image style={{width: 24, height: 24}} source={require('../resources/images/filterIcon.png')} />
+                            <TouchableOpacity style={{backgroundColor: '#fff', borderRadius: 13, elevation: 10, 
+                                flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding: 20, marginTop: 5}} onPress={() => {setModalShown(true)}}>
+                                <Image style={{width: 18, height: 18, resizeMode: 'contain'}} source={require('../resources/images/filterIcon.png')} />
                             </TouchableOpacity>
                         </View>
+                    </View>
+                    <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: -30, marginTop: 15}}>
+                        <Image style={{width: 80, height: 150, resizeMode: 'cover'}} source={require('../resources/images/categoryPic1.png')} />
+                        <Image style={{width: 80, height: 150, resizeMode: 'cover'}} source={require('../resources/images/categoryPic2.png')} />
+                        <Image style={{width: 80, height: 150, resizeMode: 'cover'}} source={require('../resources/images/categoryPic3.png')} />
+                        <Image style={{width: 80, height: 150, resizeMode: 'cover'}} source={require('../resources/images/categoryPic4.png')} />                                  
                     </View>
                     {searchInput.length === 0 ? <>
                     <View style={{marginTop: 16}}>
                         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                            <Text style={[{color: colors.primary, fontWeight: 'bold', fontSize: 20}]}>Featured Restaurants</Text>
+                            <Text style={[{color: '#323643', fontWeight: 'bold', fontSize: 18, marginBottom: 15}]}>Featured Restaurants</Text>
                             <TouchableOpacity><Text style={[{color: colors.primaryBackground}]}>View More</Text></TouchableOpacity>
                         </View>
                         <View>
@@ -96,7 +104,7 @@ export default function CustomerHome({navigation}) {
                     </View>
                     <View style={{marginTop: 16}}>
                         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                            <Text style={[{color: colors.primary, fontWeight: 'bold', fontSize: 20}]}>Popular Foods</Text>
+                            <Text style={[{color: '#323643', fontWeight: 'bold', fontSize: 18, marginBottom: 15, marginTop: 10}]}>Popular Foods</Text>
                         </View>
                         <View>
                             <FoodCardList navigation={navigation} foods={popularFoods} />

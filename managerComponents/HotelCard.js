@@ -34,12 +34,11 @@ export default function HotelCard({ hotel, navigation, deleteHotel, particularHo
     else setRating(totalStars / reviewCount)
 
     storage()
-      .ref(hotel.hotelImage) //name in storage in firebase console
+      .ref(hotel.hotelImage) // Check if hotel.hotelImage is the correct path
       .getDownloadURL()
       .then((url) => {
-        setImage(url)
-      })
-
+        setImage(url);
+      });
   }, [])
 
   console.log(particularHotel)
