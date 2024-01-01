@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, Image, Modal, Alert } from "react-native"
+import { StyleSheet, View, Text, TouchableOpacity, Image, Modal, Alert, ScrollView } from "react-native"
 import { TextInput, Button } from "react-native-paper"
 import { useTheme } from '@react-navigation/native';
 import RestaurantCardList from './RestaurantCardList';
@@ -86,32 +86,34 @@ export default function CustomerHome({navigation}) {
                             </TouchableOpacity>
                         </View>
                     </View>
-                    <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: -30, marginTop: 15}}>
-                        <Image style={{width: 80, height: 150, resizeMode: 'cover'}} source={require('../resources/images/categoryPic1.png')} />
-                        <Image style={{width: 80, height: 150, resizeMode: 'cover'}} source={require('../resources/images/categoryPic2.png')} />
-                        <Image style={{width: 80, height: 150, resizeMode: 'cover'}} source={require('../resources/images/categoryPic3.png')} />
-                        <Image style={{width: 80, height: 150, resizeMode: 'cover'}} source={require('../resources/images/categoryPic4.png')} />                                  
-                    </View>
-                    {searchInput.length === 0 ? <>
-                    <View style={{marginTop: 16}}>
-                        <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                            <Text style={[{color: '#323643', fontWeight: 'bold', fontSize: 18, marginBottom: 15}]}>Featured Restaurants</Text>
-                            <TouchableOpacity><Text style={[{color: colors.primaryBackground}]}>View More</Text></TouchableOpacity>
+                    <ScrollView >
+                        <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: -30, marginTop: 15}}>
+                            <Image style={{width: 80, height: 150, resizeMode: 'cover'}} source={require('../resources/images/categoryPic1.png')} />
+                            <Image style={{width: 80, height: 150, resizeMode: 'cover'}} source={require('../resources/images/categoryPic2.png')} />
+                            <Image style={{width: 80, height: 150, resizeMode: 'cover'}} source={require('../resources/images/categoryPic3.png')} />
+                            <Image style={{width: 80, height: 150, resizeMode: 'cover'}} source={require('../resources/images/categoryPic4.png')} />                                  
                         </View>
-                        <View>
-                            <RestaurantCardList hotels={popularHotels} navigation={navigation} />
+                        {searchInput.length === 0 ? <>
+                        <View style={{marginTop: 16}}>
+                            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                                <Text style={[{color: '#323643', fontWeight: 'bold', fontSize: 18, marginBottom: 15}]}>Featured Restaurants</Text>
+                                <TouchableOpacity><Text style={[{color: colors.primaryBackground, marginBottom: 16}]}>View More</Text></TouchableOpacity>
+                            </View>
+                            <View>
+                                <RestaurantCardList hotels={popularHotels} navigation={navigation} />
+                            </View>
                         </View>
-                    </View>
-                    <View style={{marginTop: 16}}>
-                        <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                            <Text style={[{color: '#323643', fontWeight: 'bold', fontSize: 18, marginBottom: 15, marginTop: 10}]}>Popular Foods</Text>
+                        <View style={{marginTop: 16}}>
+                            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                                <Text style={[{color: '#323643', fontWeight: 'bold', fontSize: 18, marginBottom: 15, marginTop: 10}]}>Popular Foods</Text>
+                            </View>
+                            <View>
+                                <FoodCardList navigation={navigation} foods={popularFoods} />
+                            </View>
                         </View>
-                        <View>
-                            <FoodCardList navigation={navigation} foods={popularFoods} />
-                        </View>
-                    </View>
-                    </> : <><SearchFoods navigation={navigation} searchInput={searchInput} /></>
-                    }
+                        </> : <><SearchFoods navigation={navigation} searchInput={searchInput} /></>
+                        }
+                    </ScrollView>
                 </View>
             </View>
         </View>

@@ -36,21 +36,28 @@ export default function ViewProfile({navigation}) {
     }
     return (
         <View style={[customerStyles.bodyContainer, {backgroundColor: colors.background}]}>
+            <Image
+              style={{
+                height: 280,
+                width: '100%',
+                resizeMode: 'stretch',
+                borderRadius: 10,
+                position: 'absolute',
+                top: -10,
+                left: 0,
+              }}
+              source={require('../resources/images/profileBg.png')}
+            />
             <View style={customerStyles.bodyInner}>
                 <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center', marginBottom: 8, marginTop: 16}}>
-                    <Image style={{width: 100, height: 100, borderRadius: 50}} source={{uri: userImage}} />
+                    <Image style={{width: 125, height: 125, borderRadius: 62, borderWidth: 10, borderColor: colors.background}} source={{uri: userImage}} />
                 </View>
-                <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center', marginBottom: 16}}>
-                    <Text style={{color: colors.primary, fontWeight: 'bold', fontSize: 16}}>{user.name}</Text>
+                <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center', marginBottom: 5}}>
+                    <Text style={{color: colors.primary, fontWeight: 'bold', fontSize: 20}}>{user.name}</Text>
                 </View>
                 <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center', marginBottom: 32}}>
-                    <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
-                        borderWidth: 1, borderRadius: 10, borderColor: colors.primaryBackground, padding: 8
-                    }}>
-                        <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                            <Image style={{width: 22, height: 22}} source={require('../resources/images/editIcon.png')} />
-                            <Text style={{color: colors.primaryBackground}}>Edit Profile</Text>
-                        </View>
+                    <TouchableOpacity>
+                            <Text style={{color: '#9796A1', fontSize: 14}}>Edit Profile</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -109,7 +116,8 @@ const customerStyles = StyleSheet.create({
     bodyInner: {
         width: '85%',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: 100
     },
     bodyHeadingMain: {
         fontSize: 30,

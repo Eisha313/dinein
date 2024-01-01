@@ -4,7 +4,7 @@ import uuid from 'react-native-uuid';
 
 export default function RestaurantCardList({hotels, navigation}) {
     return (
-        <View style={{flexDirection: 'row',  }}>
+        <View style={{flexDirection: 'row',}}>
             <ScrollView horizontal>
             {
                 hotels.map(r => {

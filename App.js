@@ -90,7 +90,7 @@ useEffect(() => {
 }, [])
   return (
     <TouchableOpacity>
-      <Image style={{width: 50, height: 50, borderRadius: 50, marginLeft: 4, marginRight: 4}} source={{uri: userImage}} />
+      <Image style={{width: 40, height: 40, borderRadius: 10, marginLeft: 4, marginRight: 4}} source={{uri: userImage}} />
     </TouchableOpacity>
   )  
 }
@@ -98,17 +98,42 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const disableHeaderOption = {headerShown: false}
+function CustomHeader({ navigation }) {
+  return (
+    <View style={{ flexDirection: 'row', alignItems: 'center' , marginTop: 20, marginLeft: 20}}>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Image style={{ elevation: 10 }} source={require('./resources/images/backButton.png')} />
+      </TouchableOpacity>
+    </View>
+  );
+}
 const styledHeader = {
-  headerStyle: {backgroundColor: appTheme.colors.secondaryBackground},
+  headerStyle: {backgroundColor: 'white'},
+  headerTitleStyle: { color: 'black'},
   headerRight: () => (
     <HeaderRightComponent />
+  ),
+  headerLeft: () => (
+    <View style={{backgroundColor: 'white', width: 40, height: 40, borderRadius: 10, marginLeft: 4, marginRight: 4, elevation: 10, justifyContent: 'center', alignItems: 'center'}}>
+      <TouchableOpacity>
+        <Image source={require('./resources/images/drawerIcon.png')} />
+      </TouchableOpacity>
+    </View>
   )
 }
 function CustomerHomeStack() {
   return (
-    <Stack.Navigator screenOptions={styledHeader}>
-      <Stack.Screen name="Customer Home" component={CustomerHome} />
-      <Stack.Screen name="View Food" component={ViewFood} />
+    <Stack.Navigator >
+      <Stack.Screen name="Customer Home" component={CustomerHome} options={styledHeader}/>
+      <Stack.Screen name="View Food" component={ViewFood}
+        options={{
+            header: ({ navigation }) => (
+              <CustomHeader navigation={navigation} />
+            ),
+            headerStyle: { backgroundColor: 'transparent' },
+            headerTransparent: true,
+            tabBarVisible: false
+          }}/>
       <Stack.Screen name="Reviews" component={Reviews} />
       <Stack.Screen name="Add Reviews" component={AddReviews} />
       <Stack.Screen name="View Hotel Foods" component={HotelFoods} />
@@ -131,8 +156,15 @@ function CustomerWishlistStack() {
 }
 function CustomerProfileStack() {
   return (
-    <Stack.Navigator screenOptions={styledHeader}>
-      <Stack.Screen name="View Profile" component={ViewProfile} />
+    <Stack.Navigator>
+      <Stack.Screen name="View Profile" component={ViewProfile} options={{
+            header: ({ navigation }) => (
+              <CustomHeader navigation={navigation} />
+            ),
+            headerStyle: { backgroundColor: 'transparent' },
+            headerTransparent: true,
+            tabBarVisible: false
+          }}/>
       <Stack.Screen name="My Wallet" component={MyWallet} />
       <Stack.Screen name="Card Details" component={CardDetails} />
     </Stack.Navigator>

@@ -52,7 +52,7 @@ export default function RestaurantCard({restaurant, navigation}) {
         )
     }
     return (
-        <TouchableOpacity style={{borderColor: colors.border, borderRadius: 15, borderWidth: 1, width: 250, marginRight: 10}} onPress={() => {
+        <TouchableOpacity style={{ borderColor: '#a8a8a8',borderRadius: 7, borderWidth: 0.2, width: 250, marginRight: 10, backgroundColor: '#fff'}} onPress={() => {
             navigation.navigate('View Hotel Foods', restaurant.name)
         }}>
             <View style={{flexDirection: 'row', justifyContent: 'center'}}>
@@ -60,19 +60,19 @@ export default function RestaurantCard({restaurant, navigation}) {
                 borderTopLeftRadius: 15, borderTopRightRadius: 15, width: 250}} source={{uri: hotelImage}} 
                 />
             </View>
-            <View style={{marginLeft: 16}}>
+            <View style={{marginLeft: 16, paddingBottom: 10}}>
                 <Text style={{color: colors.primary, fontSize: 20, fontWeight: 'bold', marginTop: 4, marginBottom: 4}}>{restaurant.name}</Text>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <Text style={{color: colors.primary}}>{rating} </Text>
+                    <Text style={{color: '#8A8E9B'}}>{rating} </Text>
                     <Image style={{width: 10, height: 10,}} source={require('../resources/images/starIcon.png')} />
-                    <Text style={{color: colors.primary}}> {'(' + totalReviews +')'}</Text>
+                    <Text style={{color: '#8A8E9B'}}> {'(' + totalReviews +')'}</Text>
                 </View>
                 <View style={{flexDirection: 'row', marginTop: 4, marginBottom: 4}}>
                     {
                         categories.map((r, i) => {
                             return (
-                                <Text key={uuid.v4()} style={{color: colors.primaryText, backgroundColor: i % 2 === 0 ? colors.primaryBackground : colors.secondaryBackground,
-                                borderRadius: 5, marginRight: 10, padding: 5}}>{r}</Text>
+                                <Text key={uuid.v4()} style={{color: '#8A8E9B', backgroundColor: '#f6f6f6',
+                                borderRadius: 5, marginRight: 10, padding: 5, paddingHorizontal: 15}}>{r}</Text>
                             )
                         })
                     }
