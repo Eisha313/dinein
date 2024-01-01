@@ -11,6 +11,18 @@ export default function ViewFood({route, navigation}) {
   const {colors} = useTheme();
   const food = route.params;
   const [buyCount, setBuyCount] = useState(1);
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleRadioButtonPress = (value) => {
+    setSelectedOption(value);
+  };
+
+  const options = [
+    { id: 1, title: 'Pepper  Julienned', imageSource: require('../resources/images/radio1.png') },
+    { id: 2, title: 'Baby Spinach', imageSource: require('../resources/images/radio2.png') },
+    { id: 3, title: 'Masroom', imageSource: require('../resources/images/radio3.png') },
+  ];
+
   function updateCount(value) {
     if (buyCount + value < 1) return;
     setBuyCount(buyCount + value);
@@ -87,13 +99,18 @@ export default function ViewFood({route, navigation}) {
   }
   return (
     <ScrollView>
+      
       <View
         style={[
           customerStyles.bodyContainer,
           {backgroundColor: colors.background},
         ]}>
         <View style={customerStyles.bodyInner}>
+          
           <View style={{width: '100%', marginTop: 20, marginBottom: 16}}>
+            <TouchableOpacity onPress={() => { addFoodToWishlist() }} style={{ height: 35, width: 35, borderRadius: 18, justifyContent: 'center', alignItems: 'center', position: 'absolute', right: 10, bottom: 10, zIndex: 1, elevation: 10, backgroundColor: colors.secondaryBackground }}>
+              <Image source={require('../resources/images/fav.png')} />
+            </TouchableOpacity>
             <Image
               style={{
                 height: 200,
@@ -106,7 +123,7 @@ export default function ViewFood({route, navigation}) {
           </View>
           <View style={{width: '100%', marginBottom: 8}}>
             <Text
-              style={{color: colors.primary, fontWeight: 'bold', fontSize: 24}}>
+              style={{color: '#323643', fontWeight: 'bold', fontSize: 28}}>
               {food.name}
             </Text>
           </View>
@@ -148,34 +165,36 @@ export default function ViewFood({route, navigation}) {
               marginBottom: 8,
             }}>
             <View>
-              <Text style={{color: colors.primaryBackground, fontSize: 24}}>
+              <Text style={{color: colors.primaryBackground, fontSize: 24, fontWeight: 'bold'}}>
                 {'Rs. ' + food.price}
               </Text>
             </View>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <TouchableOpacity
                 style={{
-                  backgroundColor: colors.primaryBackground,
-                  width: 50,
-                  height: 50,
-                  borderRadius: 100,
+                  backgroundColor: "#fff",
+                  borderWidth: 1,
+                  borderColor: colors.primaryBackground,
+                  width: 35,
+                  height: 35,
+                  borderRadius: 20,
                   flexDirection: 'row',
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}
                 onPress={() => updateCount(-1)}>
-                <Text style={{color: colors.primaryText, fontSize: 24}}>-</Text>
+                <Text style={{color: colors.primaryBackground, fontSize: 24}}>-</Text>
               </TouchableOpacity>
-              <Text style={{color: colors.primary, fontSize: 24}}>
+              <Text style={{color: colors.primary, fontWeight: "bold", fontSize: 16, marginHorizontal: 6}}>
                 {' '}
-                {buyCount}{' '}
+                {buyCount.toString().padStart(2, '0')}{' '}
               </Text>
               <TouchableOpacity
                 style={{
                   backgroundColor: colors.primaryBackground,
-                  width: 50,
-                  height: 50,
-                  borderRadius: 100,
+                  width: 35,
+                  height: 35,
+                  borderRadius: 20,
                   flexDirection: 'row',
                   justifyContent: 'center',
                   alignItems: 'center',
@@ -193,7 +212,40 @@ export default function ViewFood({route, navigation}) {
               justifyContent: 'space-between',
               marginBottom: 8,
             }}>
-            <Text style={{color: colors.primary}}>{food.description}</Text>
+            <Text style={{color: '#858992', fontSize: 15, lineHeight : 23.55, textAlign: 'justify', marginVertical: 5}}>{food.description}</Text>
+          </View>          
+          <View style={{alignItems: 'flex-start', width: '100%', marginVertical: 5}}>
+              <Text style={{color: '#323643', fontSize: 18, fontWeight: 'bold'}}>Choice of Add On</Text>
+              {options.map((option) => (
+              <View key={option.id} style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 5 }}>
+                <Image source={option.imageSource} style={{ width: 40, height: 40, marginRight: 10 }} />
+                <Text style={{ flex: 1, color: '#000'}}>{option.title}</Text>
+                <Text style={{ flex: 1, color: '#000' , textAlign: 'right', marginRight: 5}}>+ Rs. 0</Text>
+                <TouchableOpacity
+                  style={{
+                    width: 25,
+                    height: 25,
+                    borderWidth: 2,
+                    borderRadius: 15,
+                    borderColor: colors.primaryBackground,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                  onPress={() => handleRadioButtonPress(option.id)}
+                >
+                  {selectedOption === option.id && (
+                    <View
+                      style={{
+                        width: 14,
+                        height: 14,
+                        borderRadius: 7,
+                        backgroundColor: colors.primaryBackground,
+                      }}
+                    />
+                  )}
+                </TouchableOpacity>
+              </View>
+            ))}
           </View>
           <View
             style={{
@@ -201,110 +253,36 @@ export default function ViewFood({route, navigation}) {
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'space-between',
+              marginTop: 20,
               marginBottom: 8,
             }}>
-            <View>
+            <View style={{width: '100%'}}>
               <TouchableOpacity
                 style={{
                   backgroundColor: colors.secondaryBackground,
-                  paddingTop: 4,
-                  paddingBottom: 4,
-                  paddingLeft: 16,
-                  paddingRight: 16,
-                  borderRadius: 15,
+                  borderRadius: 50,
+                  flexDirection: 'row',
+                  height: 53,
+                  width: 167,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  alignSelf: 'center'
                 }}
                 onPress={() => {
                   addFoodToCart();
                   navigation.navigate('Customer Home')
                 }}>
-                <Image
-                  style={{width: 30, height: 30}}
-                  source={require('../resources/images/cartIconProduct.png')}
-                />
+                <View style={{backgroundColor: '#fff', width: 40, height: 40, borderRadius: 20, resizeMode: 'contain', justifyContent: 'center', alignItems: 'center'}}>
+                  <Image
+                    source={require('../resources/images/bottomOrders.png')}
+                  />
+                </View>
+                <Text style={{color: '#fff', fontSize: 15, fontWeight: 'bold', marginHorizontal: 10}}>ADD TO CART</Text>
               </TouchableOpacity>
+              <View>
+              
             </View>
-            <View>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: colors.secondaryBackground,
-                  paddingTop: 4,
-                  paddingBottom: 4,
-                  paddingLeft: 16,
-                  paddingRight: 16,
-                  borderRadius: 15,
-                }} onPress={() => {
-                  addFoodToWishlist()
-                }}>
-                <Image
-                  style={{width: 30, height: 30}}
-                  source={require('../resources/images/favoriteIconProduct.png')}
-                />
-              </TouchableOpacity>
             </View>
-          </View>
-          <View
-            style={{
-              width: '100%',
-              borderBottomWidth: 1,
-              borderBottomColor: colors.primaryBackground,
-            }}>
-            <Text
-              style={{color: colors.primary, fontWeight: 'bold', fontSize: 16}}>
-              Details
-            </Text>
-          </View>
-          <View
-            style={{
-              width: '100%',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
-            <View>
-              <Text style={{color: colors.primary}}>Offered By</Text>
-              <Text
-                style={{
-                  color: colors.primaryBackground,
-                  textDecorationLine: 'underline',
-                }}>
-                {food.hotelName}
-              </Text>
-            </View>
-            <View>
-              <TouchableOpacity>
-                <Text
-                  style={{
-                    color: colors.primaryBackground,
-                    textDecorationLine: 'underline',
-                  }}>
-                  Chat Now
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View
-            style={{
-              width: '100%',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
-            <View>
-              <Text style={{color: colors.primary}}>{'Size: ' + food.size}</Text>
-            </View>
-            <View>
-              <Text style={{color: colors.primary}}>
-                {'Catgeory: ' + food.category}
-              </Text>
-            </View>
-          </View>
-          <View style={{width: '100%'}}>
-            <Text style={{color: colors.primary, fontWeight: 'bold'}}>
-              Delievery Fee
-            </Text>
-            <Text style={{color: colors.primaryBackground}}>
-              {'Rs. ' + food.fee}
-            </Text>
           </View>
         </View>
       </View>

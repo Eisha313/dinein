@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {Image, Button, TouchableOpacity, View, Text} from 'react-native'
+import {Image, Button, TouchableOpacity, View, Text} from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 
 import SplashScreen from './components/SplashScreen'
 import LoginHome from './components/LoginHome'
@@ -89,7 +90,7 @@ useEffect(() => {
 }, [])
   return (
     <TouchableOpacity>
-      <Image style={{width: 50, height: 50, borderRadius: 50, marginLeft: 4, marginRight: 4}} source={{uri: userImage}} />
+      <Image style={{width: 40, height: 40, borderRadius: 10, marginLeft: 4, marginRight: 4}} source={{uri: userImage}} />
     </TouchableOpacity>
   )  
 }
@@ -97,17 +98,42 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const disableHeaderOption = {headerShown: false}
+function CustomHeader({ navigation }) {
+  return (
+    <View style={{ flexDirection: 'row', alignItems: 'center' , marginTop: 20, marginLeft: 20}}>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Image style={{ elevation: 10 }} source={require('./resources/images/backButton.png')} />
+      </TouchableOpacity>
+    </View>
+  );
+}
 const styledHeader = {
-  headerStyle: {backgroundColor: appTheme.colors.secondaryBackground},
+  headerStyle: {backgroundColor: 'white'},
+  headerTitleStyle: { color: 'black'},
   headerRight: () => (
     <HeaderRightComponent />
+  ),
+  headerLeft: () => (
+    <View style={{backgroundColor: 'white', width: 40, height: 40, borderRadius: 10, marginLeft: 4, marginRight: 4, elevation: 10, justifyContent: 'center', alignItems: 'center'}}>
+      <TouchableOpacity>
+        <Image source={require('./resources/images/drawerIcon.png')} />
+      </TouchableOpacity>
+    </View>
   )
 }
 function CustomerHomeStack() {
   return (
-    <Stack.Navigator screenOptions={styledHeader}>
-      <Stack.Screen name="Customer Home" component={CustomerHome} />
-      <Stack.Screen name="View Food" component={ViewFood} />
+    <Stack.Navigator >
+      <Stack.Screen name="Customer Home" component={CustomerHome} options={styledHeader}/>
+      <Stack.Screen name="View Food" component={ViewFood}
+        options={{
+            header: ({ navigation }) => (
+              <CustomHeader navigation={navigation} />
+            ),
+            headerStyle: { backgroundColor: 'transparent' },
+            headerTransparent: true,
+            tabBarVisible: false
+          }}/>
       <Stack.Screen name="Reviews" component={Reviews} />
       <Stack.Screen name="Add Reviews" component={AddReviews} />
       <Stack.Screen name="View Hotel Foods" component={HotelFoods} />
@@ -130,8 +156,15 @@ function CustomerWishlistStack() {
 }
 function CustomerProfileStack() {
   return (
-    <Stack.Navigator screenOptions={styledHeader}>
-      <Stack.Screen name="View Profile" component={ViewProfile} />
+    <Stack.Navigator>
+      <Stack.Screen name="View Profile" component={ViewProfile} options={{
+            header: ({ navigation }) => (
+              <CustomHeader navigation={navigation} />
+            ),
+            headerStyle: { backgroundColor: 'transparent' },
+            headerTransparent: true,
+            tabBarVisible: false
+          }}/>
       <Stack.Screen name="My Wallet" component={MyWallet} />
       <Stack.Screen name="Card Details" component={CardDetails} />
     </Stack.Navigator>
@@ -150,27 +183,50 @@ function CustomerOrdersStack() {
     </Stack.Navigator>
   )
 }
-function CustomerTabBar({ navigation }) {
+function CustomerTabBar({ navigation, state }) {
+  const getOpacity = (index) => (state.index === index ? 1 : 0.4);
+
   return (
-    <View style={{backgroundColor: 'white', paddingTop: 16, paddingBottom: 16,
-            flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center'
-    }}>
+    <View
+      style={{
+        backgroundColor: 'white',
+        paddingTop: 16,
+        paddingBottom: 16,
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+      }}
+    >
       <TouchableOpacity onPress={() => navigation.navigate('Home Stack')}>
-        <Image source={require('./resources/images/bottomHome.png')} style={{width: 40, height: 40}}></Image>
+        <Image
+          source={require('./resources/images/bottomHome.png')}
+          style={{ width: 25, height: 25, opacity: getOpacity(0), resizeMode: 'contain' }}
+        ></Image>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('Wishlist Stack')}>
-        <Image source={require('./resources/images/bottomFavorites.png')} style={{width: 40, height: 40}}></Image>
+        <Image
+          source={require('./resources/images/bottomFavorites.png')}
+          style={{ width: 25, height: 25, opacity: getOpacity(1) }}
+        ></Image>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('Orders Stack')}>
-        <Image source={require('./resources/images/bottomOrders.png')} style={{width: 40, height: 40}}></Image>
+        <Image
+          source={require('./resources/images/bottomOrders.png')}
+          style={{ width: 25, height: 25, opacity: getOpacity(2), resizeMode: 'contain' }}
+        ></Image>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('Cart Stack')}>
-        <Image source={require('./resources/images/bottomCart.png')} style={{width: 40, height: 40}}></Image>
+        <Image
+          source={require('./resources/images/bottomCart.png')}
+          style={{ width: 25, height: 25, opacity: getOpacity(3) }}
+        ></Image>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('Profile Stack')}>
-        <Image source={require('./resources/images/bottomProfile.png')} style={{width: 40, height: 40}}></Image>
+        <Image
+          source={require('./resources/images/bottomProfile.png')}
+          style={{ width: 25, height: 25, opacity: getOpacity(4) }}
+        ></Image>
       </TouchableOpacity>
-
     </View>
   );
 }
@@ -178,10 +234,10 @@ function CustomerTabNavigation() {
   return (
     <Tab.Navigator tabBar={CustomerTabBar} screenOptions={disableHeaderOption}>
       <Tab.Screen name="Home Stack" component={CustomerHomeStack} />
-      <Tab.Screen name="Cart Stack" component={CustomerCartStack} />
       <Tab.Screen name="Wishlist Stack" component={CustomerWishlistStack} />
-      <Tab.Screen name="Profile Stack" component={CustomerProfileStack} />
       <Tab.Screen name="Orders Stack" component={CustomerOrdersStack} />
+      <Tab.Screen name="Cart Stack" component={CustomerCartStack} />
+      <Tab.Screen name="Profile Stack" component={CustomerProfileStack} />
     </Tab.Navigator>
   ) 
 }

@@ -36,19 +36,19 @@ export default function FoodCard({food, navigation}) {
         )
     }
     return (
-        <TouchableOpacity style={{borderColor: colors.border, borderRadius: 15, borderWidth: 1, width: '48%', flexWrap: 'wrap', marginBottom: 16}}
+        <TouchableOpacity style={{borderColor: '#a8a8a8', borderRadius: 9, backgroundColor: '#fff', borderWidth: 0.3, width: '48%', flexWrap: 'wrap', marginBottom: 16}}
         onPress={() => {navigation.navigate('View Food', food)}}>
             <View style={{flexDirection: 'row', justifyContent: 'center'}}>
                 <Image style={{ height: 100,
                 borderTopLeftRadius: 15, borderTopRightRadius: 15, width: '100%'}} source={{uri: foodImage}} />
             </View>
-            <View style={{marginLeft: 16}}>
+            <View style={{marginLeft: 16, paddingBottom: 10}}>
                 <Text style={{color: colors.primary, fontSize: 20, fontWeight: 'bold', marginTop: 4, marginBottom: 1}}>{food.name}</Text>
                 <Text style={{color: colors.primaryBackground, fontSize: 16,  marginBottom: 2}}>{'Rs. ' + food.price}</Text>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <Text style={{color: colors.primary}}>{rating} </Text>
+                    <Text style={{color: '#8A8E9B'}}>{rating} </Text>
                     <Image style={{width: 10, height: 10,}} source={require('../resources/images/starIcon.png')} />
-                    <Text style={{color: colors.primary}}> {'(' + totalReviews +')'}</Text>
+                    <Text style={{color: '#8A8E9B'}}> {'(' + totalReviews +')'}</Text>
                 </View>
             </View>
         </TouchableOpacity>
