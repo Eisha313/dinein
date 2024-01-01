@@ -29,7 +29,7 @@ export default function CustomerHome({navigation}) {
             });
             const hotels = []
             const foods = []
-            collectionOutput.forEach((h) => {   //iterating through each indiviual array
+            collectionOutput.forEach((h) => {   
                 h.forEach((tempHotel) => {
                     hotels.push(tempHotel)
                     tempHotel.foods.forEach((f) => {
