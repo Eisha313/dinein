@@ -53,17 +53,50 @@ export default function HotelFoods({route, navigation}) {
   }, []);
   return (
     <View style={customerStyles.bodyContainer}>
+      <Image
+              style={{
+                width: '100%',
+                resizeMode: 'contain',
+                borderRadius: 10,
+                position: 'absolute',
+                top: -10,
+                right: -40,
+              }}
+              source={require('../resources/images/hotel.png')}
+            />
       <View style={customerStyles.bodyInner}>
-        <View style={{marginTop: 16, width: '100%'}}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View style={{marginTop: 100, width: '100%'}}>
+          <View style={{marginBottom: 50}}>
             <Text
               style={[
-                {color: colors.primary, fontWeight: 'bold', fontSize: 20},
+                {color: '#272D2F', fontWeight: 'bold', fontSize: 45},
               ]}>
-              Foods for {hotelName}
+              Fast
+            </Text>
+            <Text
+              style={[
+                {color: '#35654E', marginTop: -20, fontWeight: 'bold', fontSize: 55},
+              ]}>
+              Foods
+            </Text>
+            <Text
+              style={[
+                {color: colors.primary, marginTop: -10,  fontWeight: 'bold', fontSize: 30},
+              ]}>
+              ( {hotelName} )
             </Text>
           </View>
-          <View>
+          <View style={{marginBottom: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
+            <View style={{ flexDirection: 'row'}}>
+              <Text style={{color: "#000", fontWeight: 'bold', fontSize: 14}}>Sorted By:   </Text>
+              <Text style={{color: "#000", fontSize: 14}}> Date Modified </Text>
+            </View>
+            <TouchableOpacity style={{ resizeMode: 'contain', height: 30, width: 30, borderRadius: 5, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', elevation: 5, padding: 5 }}>
+              <Image style={{height: 15, width: 15,}} source={require('../resources/images/filterIcon.png')} />
+            </TouchableOpacity>
+
+          </View>
+          <View style={{paddingTop: 30}}>
             <FoodCardList navigation={navigation} foods={foods} />
           </View>
         </View>

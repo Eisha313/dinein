@@ -1,4 +1,4 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native'
+import {View, Text, Image, TouchableOpacity, TextInput} from 'react-native'
 import { useTheme } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import storage from '@react-native-firebase/storage'
@@ -9,7 +9,7 @@ export default function ProfileAbout({user, navigation}) {
 
     return (
         <View style={{marginTop: 32}}>
-            <View style={{marginBottom: 24}}>
+            {/* <View style={{marginBottom: 24}}>
                 <View style={{flexDirection: 'row', justifyContent: 'center'}}>
                     <Text style={{color: colors.primary, fontWeight: 'bold'}}>Delievering to  </Text>
                     <Image style={{width: 22, height: 22}} source={require('../resources/images/locationIcon.png')} />
@@ -17,26 +17,38 @@ export default function ProfileAbout({user, navigation}) {
                 <View style={{flexDirection: 'row', justifyContent: 'center'}}>
                     <Text style={{color: colors.primaryBackground}}>{user.address}</Text>
                 </View>
+            </View> */}
+            <View  style={{paddingBottom: 8, marginBottom: 14}}>
+                <Text style={{color: "#9796A1", fontSize: 14, marginBottom: 10, marginLeft: 5}}>Full Name</Text>
+                <TextInput editable={false} style={{color: '#111719', fontSize: 16, fontWeight: 'bold', backgroundColor: '#fcfffc', borderWidth: 0.5, borderRadius: 7, padding: 14 }} value={user.name}/>
             </View>
-            <View  style={{flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 8, borderBottomWidth: 1, 
-                            borderBottomColor: colors.secondaryBackground, marginBottom: 16}}>
-                <Text style={{color: colors.primary}}>Total Orders</Text>
-                <Text style={{color: colors.primaryBackground}}>5</Text>
+            <View  style={{paddingBottom: 8, marginBottom: 14}}>
+                <Text style={{color: "#9796A1", fontSize: 14, marginBottom: 10, marginLeft: 5}}>E-Mail</Text>
+                <TextInput editable={false} style={{color: '#111719', fontSize: 16, fontWeight: 'bold', backgroundColor: '#fcfffc', borderRadius: 7, padding: 14 }} value={user.email}/>
             </View>
-            <View  style={{flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 8, borderBottomWidth: 1, 
-                            borderBottomColor: colors.secondaryBackground, marginBottom: 16}}>
-                <Text style={{color: colors.primary}}>Reviews</Text>
-                <Text style={{color: colors.primaryBackground}}>5</Text>
-            </View>
-            <View  style={{flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 8, marginBottom: 8}}>
-                <Text style={{color: colors.primary}}>Account Type</Text>
-                <Text style={{color: colors.primaryBackground}}>{user.type}</Text>
+            <View  style={{paddingBottom: 8, marginBottom: 14}}>
+                <Text style={{color: "#9796A1", fontSize: 14, marginBottom: 10, marginLeft: 5}}>Phone Number</Text>
+                <TextInput editable={false} style={{color: '#111719', fontSize: 16, fontWeight: 'bold', backgroundColor: '#fcfffc', borderRadius: 7, padding: 14 }} value={user.address}/>
             </View>
             <TouchableOpacity onPress={async () => {
                 await AsyncStorage.removeItem('user')
                 navigation.popToTop()
-            }} style={{flexDirection: 'row', paddingBottom: 8, marginBottom: 8, marginTop: 8}}>
-                <Text style={{color: colors.primaryBackground, fontSize: 16, textDecorationLine: 'underline'}}>Logout</Text>
+            }} style={{
+                backgroundColor: colors.secondaryBackground,
+                borderRadius: 50,
+                flexDirection: 'row',
+                height: 53,
+                paddingHorizontal: 8,
+                justifyContent: 'center',
+                alignItems: 'center',
+                alignSelf: 'flex-end'
+              }}>
+                <View style={{backgroundColor: '#fff', width: 40, height: 40, borderRadius: 20, resizeMode: 'contain', justifyContent: 'center', alignItems: 'center'}}>
+                  <Image
+                    source={require('../resources/images/logoutBtn.png')}
+                  />
+                </View>
+                <Text style={{color: '#fff', fontSize: 15, fontWeight: 'bold', marginHorizontal: 10}}>LOGOUT</Text>
             </TouchableOpacity>
         </View>
     )

@@ -18,9 +18,9 @@ export default function ViewFood({route, navigation}) {
   };
 
   const options = [
-    { id: 1, title: 'Pepper  Julienned', imageSource: require('../resources/images/radio1.png') },
+    { id: 1, title: 'Pepper Julienned', imageSource: require('../resources/images/radio1.png') },
     { id: 2, title: 'Baby Spinach', imageSource: require('../resources/images/radio2.png') },
-    { id: 3, title: 'Masroom', imageSource: require('../resources/images/radio3.png') },
+    { id: 3, title: 'Mashroom', imageSource: require('../resources/images/radio3.png') },
   ];
 
   function updateCount(value) {

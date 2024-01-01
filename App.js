@@ -101,15 +101,16 @@ const disableHeaderOption = {headerShown: false}
 function CustomHeader({ navigation }) {
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center' , marginTop: 20, marginLeft: 20}}>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Image style={{ elevation: 10 }} source={require('./resources/images/backButton.png')} />
+      <TouchableOpacity style={{ elevation: 10 }} onPress={() => navigation.goBack()}>
+        <Image  source={require('./resources/images/backButton.png')} />
       </TouchableOpacity>
     </View>
   );
 }
 const styledHeader = {
-  headerStyle: {backgroundColor: 'white'},
-  headerTitleStyle: { color: 'black'},
+  headerStyle: {backgroundColor: 'transparent'},
+  headerTransparent: true,
+  headerTitleStyle: { textAlign: 'center', color: 'black', flex: 1, backgroundColor: '#000'},
   headerRight: () => (
     <HeaderRightComponent />
   ),
@@ -136,7 +137,15 @@ function CustomerHomeStack() {
           }}/>
       <Stack.Screen name="Reviews" component={Reviews} />
       <Stack.Screen name="Add Reviews" component={AddReviews} />
-      <Stack.Screen name="View Hotel Foods" component={HotelFoods} />
+      <Stack.Screen name="View Hotel Foods" component={HotelFoods}
+      options={{
+            header: ({ navigation }) => (
+              <CustomHeader navigation={navigation} />
+            ),
+            headerStyle: { backgroundColor: 'transparent' },
+            headerTransparent: true,
+            tabBarVisible: false
+          }} />
     </Stack.Navigator>
   )
 }
@@ -149,7 +158,15 @@ function CustomerCartStack() {
 }
 function CustomerWishlistStack() {
   return (
-    <Stack.Navigator screenOptions={styledHeader}>
+    <Stack.Navigator screenOptions={{
+      header: ({ navigation }) => (
+        <CustomHeader navigation={navigation} />
+      ),
+      headerStyle: { backgroundColor: 'transparent' },
+      headerTransparent: true,
+      tabBarVisible: false
+    
+    }} >
       <Stack.Screen name="Wishlist" component={Wishlist} />
     </Stack.Navigator>
   )
@@ -234,7 +251,7 @@ function CustomerTabNavigation() {
   return (
     <Tab.Navigator tabBar={CustomerTabBar} screenOptions={disableHeaderOption}>
       <Tab.Screen name="Home Stack" component={CustomerHomeStack} />
-      <Tab.Screen name="Wishlist Stack" component={CustomerWishlistStack} />
+      <Tab.Screen name="Wishlist Stack" component={CustomerWishlistStack}/>
       <Tab.Screen name="Orders Stack" component={CustomerOrdersStack} />
       <Tab.Screen name="Cart Stack" component={CustomerCartStack} />
       <Tab.Screen name="Profile Stack" component={CustomerProfileStack} />
