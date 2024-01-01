@@ -86,12 +86,12 @@ export default function CustomerHome({navigation}) {
                             </TouchableOpacity>
                         </View>
                     </View>
-                    <ScrollView >
-                        <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: -30, marginTop: 15}}>
-                            <Image style={{width: 80, height: 150, resizeMode: 'cover'}} source={require('../resources/images/categoryPic1.png')} />
-                            <Image style={{width: 80, height: 150, resizeMode: 'cover'}} source={require('../resources/images/categoryPic2.png')} />
-                            <Image style={{width: 80, height: 150, resizeMode: 'cover'}} source={require('../resources/images/categoryPic3.png')} />
-                            <Image style={{width: 80, height: 150, resizeMode: 'cover'}} source={require('../resources/images/categoryPic4.png')} />                                  
+                    <ScrollView style={{marginTop: 10}}>
+                        <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: -30, marginTop: 5}}>
+                            <TouchableOpacity><Image style={{width: 80, height: 150, resizeMode: 'cover'}} source={require('../resources/images/categoryPic1.png')} /></TouchableOpacity>
+                            <TouchableOpacity><Image style={{width: 80, height: 150, resizeMode: 'cover'}} source={require('../resources/images/categoryPic2.png')} /></TouchableOpacity>
+                            <TouchableOpacity><Image style={{width: 80, height: 150, resizeMode: 'cover'}} source={require('../resources/images/categoryPic3.png')} /></TouchableOpacity>
+                            <TouchableOpacity><Image style={{width: 80, height: 150, resizeMode: 'cover'}} source={require('../resources/images/categoryPic4.png')} /></TouchableOpacity>                                 
                         </View>
                         {searchInput.length === 0 ? <>
                         <View style={{marginTop: 16}}>
@@ -123,7 +123,8 @@ const customerStyles = StyleSheet.create({
     bodyContainer: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginTop: 70
     },
     bodyInner: {
         width: '90%',

@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native"
+import { View, StyleSheet, Text, Image, TouchableOpacity, ScrollView } from "react-native"
 import {Button} from 'react-native-paper'
 import { useTheme } from '@react-navigation/native';
 import { useState, useEffect } from "react";
@@ -60,7 +60,7 @@ export default function ViewProfile({navigation}) {
                             <Text style={{color: '#9796A1', fontSize: 14}}>Edit Profile</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between'}}>
+                <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-around'}}>
                     <View>
                         <TouchableOpacity style={{paddingBottom: 8, borderBottomColor: colors.primaryBackground, 
                             borderBottomWidth: isAboutClicked ? 5 : 0
@@ -78,31 +78,31 @@ export default function ViewProfile({navigation}) {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={{width: '100%'}}>
+                <ScrollView style={{width: '100%'}}>
                     {
                         isAboutClicked ? <ProfileAbout navigation={navigation} user={user} /> : <><View style={{marginTop: 32, alignItems: 'center'}}>
                            
                                     <TouchableOpacity style={{marginTop: 38,
                                 marginRight: 17,
                                 marginLeft: 17,
-                                backgroundColor: colors.card,
+                                backgroundColor: colors.primaryBackground,
                                 alignItems: 'center',
                                 padding: 15,
                                 borderRadius: 12,
-                                width: '100%'}} onPress={() => navigation.navigate('Card Details')}><Text style={{color: colors.primaryText}}>Add Credit Card Details</Text></TouchableOpacity>
+                                width: '100%'}} onPress={() => navigation.navigate('Card Details')}><Text style={{color: colors.primaryText, fontWeight: 'bold', fontSize: 15}}>Add Credit Card Details</Text></TouchableOpacity>
                                 
                                     <TouchableOpacity style={{marginTop: 38,
                                 marginRight: 17,
                                 marginLeft: 17,
-                                backgroundColor: colors.card,
+                                backgroundColor: colors.primaryBackground,
                                 alignItems: 'center',
                                 padding: 15,
                                 borderRadius: 12,
-                                width: '100%'}} onPress={() => navigation.navigate('My Wallet')}><Text style={{color: colors.primaryText}}>Deposit Amount</Text></TouchableOpacity>
+                                width: '100%'}} onPress={() => navigation.navigate('My Wallet')}><Text style={{color: colors.primaryText, fontWeight: 'bold', fontSize: 15}}>Deposit Amount</Text></TouchableOpacity>
                         </View>
                         </>
                     }
-                </View>
+                </ScrollView>
             </View>
         </View>
     )
